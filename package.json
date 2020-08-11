@@ -1,9 +1,9 @@
 {
-  "name": "cordova-plugin-ms-adal",
+  "name": "cordova-plugin-ms-adal-criterion",
   "version": "0.10.1",
   "description": "Provides Microsoft Azure Active Directory (ADAL) OAuth client.",
   "cordova": {
-    "id": "cordova-plugin-ms-adal",
+    "id": "cordova-plugin-ms-adal-criterion",
     "platforms": [
       "android",
       "ios",
@@ -44,7 +44,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AzureAD/azure-activedirectory-library-for-cordova.git"
+    "url": "git+https://github.com/AzureAD/azure-activedirectory-library-for-cordova-criterion.git"
   },
   "keywords": [
     "microsoft",
@@ -59,7 +59,7 @@
   "author": "MSOpenTech",
   "license": "Apache 2.0",
   "bugs": {
-    "url": "https://github.com/AzureAD/azure-activedirectory-library-for-cordova/issues"
+    "url": "https://github.com/AzureAD/azure-activedirectory-library-for-cordova-criterion/issues"
   },
-  "homepage": "https://github.com/AzureAD/azure-activedirectory-library-for-cordova#readme"
+  "homepage": "https://github.com/AzureAD/azure-activedirectory-library-for-cordova-criterion#readme"
 }
