@@ -57,33 +57,33 @@ typedef enum ADUserIdentifierType
     ADUserIdentifierType _type;
 }
 
-@property (readonly, retain, nullable) NSString* userId;
+@property (readonly, retain) NSString* userId;
 @property (readonly) ADUserIdentifierType type;
 
 /*!
     Creates a ADUserIdentifier with the provided userId and RequiredDisplayableId type.
     @param  userId  The userid
  */
-+ (nullable ADUserIdentifier*)identifierWithId:(nonnull NSString*)userId;
++ (ADUserIdentifier*)identifierWithId:(NSString*)userId;
 
 /*!
     Creates a ADUserIdentifier with the provided userId and type.
     @param  userId  The userid
     @param  type    The type that describes how ADAL should validate this User ID.
  */
-+ (nullable ADUserIdentifier*)identifierWithId:(nonnull NSString*)userId
-                                          type:(ADUserIdentifierType)type;
++ (ADUserIdentifier*)identifierWithId:(NSString*)userId
+                                 type:(ADUserIdentifierType)type;
 
-+ (nullable ADUserIdentifier*)identifierWithId:(nonnull NSString *)userId
-                                typeFromString:(nonnull NSString*)type;
++ (ADUserIdentifier*)identifierWithId:(NSString *)userId
+                       typeFromString:(NSString*)type;
 
-+ (BOOL)identifier:(nullable ADUserIdentifier*)identifier
-       matchesInfo:(nullable ADUserInformation*)info;
++ (BOOL)identifier:(ADUserIdentifier*)identifier
+       matchesInfo:(ADUserInformation*)info;
 
-- (nullable NSString*)userIdMatchString:(nonnull ADUserInformation*)info;
+- (NSString*)userIdMatchString:(ADUserInformation*)info;
 
-- (nullable NSString*)typeAsString;
-+ (nullable NSString*)stringForType:(ADUserIdentifierType)type;
+- (NSString*)typeAsString;
++ (NSString*)stringForType:(ADUserIdentifierType)type;
 
 - (BOOL)isDisplayable;
 

@@ -52,7 +52,6 @@ typedef enum
     NSUUID*                         _correlationId;
     BOOL                            _multiResourceRefreshToken;
     BOOL                            _extendedLifeTimeToken;
-    NSString*                       _authority;
 }
 
 /*! See the ADAuthenticationResultStatus details */
@@ -61,30 +60,23 @@ typedef enum
 /*! A valid access token, if the results indicates success. The property is 
  calculated from the tokenCacheItem one. The property is nil, in 
  case of error.*/
-@property (readonly, nullable) NSString* accessToken;
+@property (readonly) NSString* accessToken;
 
-@property (readonly, nullable) ADTokenCacheItem* tokenCacheItem;
+@property (readonly) ADTokenCacheItem* tokenCacheItem;
 
 /*! The error that occurred or nil, if the operation was successful */
-@property (readonly, nullable) ADAuthenticationError* error;
+@property (readonly) ADAuthenticationError* error;
 
 /*! Set to YES, if part of the result contains a refresh token, which is a multi-resource
  refresh token. */
 @property (readonly) BOOL multiResourceRefreshToken;
 
 /*! The correlation ID of the request(s) that get this result. */
-@property (readonly, nullable) NSUUID* correlationId;
+@property (readonly) NSUUID* correlationId;
 
 /*! Some access tokens have extended lifetime when server is in an unavailable state.
  This property indicates whether the access token is returned in such a state. */
 @property (readonly) BOOL extendedLifeTimeToken;
-
-/*!
- Represents the authority used for getting the token from STS and caching it.
- This authority should be used for subsequent silent requests. 
- It will be different from the authority provided by developer for sovereign cloud scenarios.
- */
-@property (readonly, nullable) NSString* authority;
 
 @end
 

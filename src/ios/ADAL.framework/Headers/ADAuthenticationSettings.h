@@ -23,9 +23,7 @@
 
 #import <Foundation/Foundation.h>
 
-#if !TARGET_OS_IPHONE
 @protocol ADTokenCacheDelegate;
-#endif
 
 /*! The class stores global settings for the ADAL library. It is a singleton class
  and the alloc, init and new should not be called directly. The "sharedInstance" selector
@@ -41,7 +39,7 @@
 }
 
 /*! The static instance of the singleton settings class*/
-+(nonnull ADAuthenticationSettings*) sharedInstance;
++(ADAuthenticationSettings*) sharedInstance;
 
 /*! The timeout used for any of the web requests. Specified in seconds. */
 @property int requestTimeOut;
@@ -53,17 +51,12 @@
 @property uint expirationBuffer;
 
 #if TARGET_OS_IPHONE
-/*! deprecated: This is replaced by webviewPresentationStyle. */
-@property BOOL enableFullScreen __attribute((deprecated("Use the webviewPresentationStyle property instead.")));
-
-
-/*! Used for webView presentation. Default is UIModalPresentationFullScreen */
-@property UIModalPresentationStyle webviewPresentationStyle;
-
+/*! Used for the webView. Default is YES.*/
+@property BOOL enableFullScreen;
 #endif //TARGET_OS_IPHONE
 
 #if !TARGET_OS_IPHONE
-@property (copy, nullable) id<ADTokenCacheDelegate> defaultStorageDelegate;
+@property (copy) id<ADTokenCacheDelegate> defaultStorageDelegate;
 #endif
 
 #if TARGET_OS_IPHONE
@@ -79,8 +72,8 @@
  group, or +[ADKeychainTokenCache defaultKeychainCache] has been called then
  this value cannot be changed. Doing so will throw an exception.
  */
-- (nonnull NSString*)defaultKeychainGroup;
-- (void)setDefaultKeychainGroup:(nullable NSString*)keychainGroup;
+- (NSString*)defaultKeychainGroup;
+- (void)setDefaultKeychainGroup:(NSString*)keychainGroup;
 #endif // TARGET_OS_IPHONE
 
 @end

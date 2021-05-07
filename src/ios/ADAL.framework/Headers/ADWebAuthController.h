@@ -23,31 +23,48 @@
 
 @class ADAuthenticationError;
 @class ADAuthenticationViewController;
-@class MSIDTelemetryUIEvent;
+@class ADTelemetryUIEvent;
 @class ADRequestParameters;
 
 #import "ADAuthenticationContext.h"
 
 /*! Fired at the start of a resource load in the webview. The URL of the load, if available, will be in the @"url" key in the userInfo dictionary */
-extern NSString* _Nonnull ADWebAuthDidStartLoadNotification;
+extern NSString* ADWebAuthDidStartLoadNotification;
 
 /*! Fired when a resource finishes loading in the webview. */
-extern NSString* _Nonnull ADWebAuthDidFinishLoadNotification;
+extern NSString* ADWebAuthDidFinishLoadNotification;
 
 /*! Fired when web authentication fails due to reasons originating from the network. Look at the @"error" key in the userInfo dictionary for more details.*/
-extern NSString* _Nonnull ADWebAuthDidFailNotification;
+extern NSString* ADWebAuthDidFailNotification;
 
 /*! Fired when authentication finishes */
-extern NSString* _Nonnull ADWebAuthDidCompleteNotification;
+extern NSString* ADWebAuthDidCompleteNotification;
 
 /*! Fired before ADAL invokes the broker app */
-extern NSString* _Nonnull ADWebAuthWillSwitchToBrokerApp;
+extern NSString* ADWebAuthWillSwitchToBrokerApp;
 
 /*! Fired when the application receives a response from the broker. Look at the @"response"
     key in the userInfo dictionary for the broker response */
-extern NSString* _Nonnull ADWebAuthDidReceieveResponseFromBroker;
+extern NSString* ADWebAuthDidReceieveResponseFromBroker;
 
 @interface ADWebAuthController : NSObject
+{
+    ADAuthenticationViewController * _authenticationViewController;
+    
+    NSLock * _completionLock;
+    NSString * _endURL;
+    
+    BOOL _loading;
+    // Used for managing the activity spinner
+    NSTimer* _spinnerTimer;
+    
+    BOOL _complete;
+    
+    ADRequestParameters* _requestParams;
+    ADTelemetryUIEvent* _telemetryEvent;
+    
+    void (^_completionBlock)( ADAuthenticationError *, NSURL *);
+}
 
 //Cancel the web authentication session which might be happening right now
 //Note that it only works if there's an active web authentication session going on
@@ -60,7 +77,7 @@ extern NSString* _Nonnull ADWebAuthDidReceieveResponseFromBroker;
  application can use this API to retrieve a response that was received from the
  broker but we no longer had an active completion block to hand it to.
  */
-+ (nullable ADAuthenticationResult *)responseFromInterruptedBrokerSession;
++ (ADAuthenticationResult *)responseFromInterruptedBrokerSession;
 #endif
 
 @end
